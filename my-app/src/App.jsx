@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Login from "./containers/login/Login";
 import SignUp from "./containers/signUp/SignUp";
 import Home from "./containers/home/Home";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class App extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         {this.state.showLogin && <Login handleShow={this.handleShow} />}
         {this.state.showSignUp && <SignUp handleShow={this.handleShow} />}
         {this.state.showHome && <Home handleShow={this.handleShow} />}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Producto extends Component {
+export default class Producto extends Component {
   constructor(props) {
     super(props);
   }
@@ -11,20 +11,24 @@ class Producto extends Component {
       "border-radious": "14px"
     };
 
-    let { name, description, price, _id, photo, addToCarrito } = this.props;
+    const { idProd, name, description, price, photo, addToCarrito } = this.props;
 
     return (
-      <figure className="col-lg-3" style={style}>
-        <img alt={name} src={photo} />
+      <figure className="col-lg-3 h-30" style={style}>
+        <img className="img-fluid rounded h-40 w-100" alt={name} src={photo} />
         <figcaption>
-          <h2>Nombre: {name}</h2>
-          <h3>Descripción: {description}</h3>
-          <p>Precio: ${price}</p>
+          <h4>{name}</h4>
+          <h5>${price}</h5>
+          <p>{description}</p>
+          <button
+            className="btn btn-primary mb-2 mx-auto"
+            onClick={evt => addToCarrito(idProd)}
+          >
+            Agregar
+          </button>
         </figcaption>
-        <button className="btn btn-primary mb-2 mx-auto" onClick={evt => addToCarrito(_id)}>Agregar</button>
       </figure>
     );
   }
 }
 
-export default Producto;

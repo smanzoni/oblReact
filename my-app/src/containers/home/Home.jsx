@@ -1,58 +1,55 @@
 import React, { Component } from "react";
 import Producto from "./../../components/Producto";
-import "./home.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Layout from "./../../components/Layout";
 import { getProducts } from "../../librerias-utils/services";
+//import { addToCart } from "../../librerias-utils/utils";
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { products: [], productosCarrito: [], msg: "" };
+
+    this.state = { products: [], productosCarrito: [] };
   }
 
   componentDidMount() {
     getProducts()
       .then(response => {
-        this.setState({ products: response, msg: "" });
+        console.log(response);
+        this.setState({ products: response.data });
       })
       .catch(error => {
-        this.setState({ msg: "Error" });
+        alert("Error al cargar los productos.");
       });
   }
 
   addToCarrito = idProducto => {
-    let prods = this.state.productosCarrito;
-    this.setState({ productosCarrito: [...prods, idProducto] });
+    // let { productosCarrito } = this.state;
+    // let cart = addToCart(productosCarrito, idProducto);
+    // this.setState({ productosCarrito: cart });
   };
 
   render() {
-    let { products } = this.state;
+    const { products } = this.state;
+    const { handleShow } = this.props;
 
     return (
-      <div className="container">
+      <div>
+        <div className="row d-block">
+          <Layout handleShow={handleShow} />
+        </div>
         <div className="row">
+          <div className="d-block"></div>
           {products.map((p, index) => (
-            <div>
-              <Producto
-                key={index}
-                name={p.name}
-                description={p.description}
-                price={p.price}
-                photo={p.photo}
-                addToCarrito={this.addToCarrito}
-              />
-            </div>
+            <Producto
+              key={index}
+              idProd={p._id}
+              name={p.name}
+              description={p.description}
+              price={p.price}
+              photo={p.photo}
+              addToCarrito={this.addToCarrito}
+            />
           ))}
-
-          
-          <button
-            onClick={() => this.props.handleShow("login")}
-            className="btn btn-primary"
-          >
-            Salir
-          </button>
-
-          <p>{this.state.msg}</p>
         </div>
       </div>
     );

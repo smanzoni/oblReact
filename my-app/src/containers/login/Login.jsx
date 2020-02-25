@@ -15,7 +15,7 @@ export default class Login extends Component {
   validateLogin = event => {
     event.preventDefault();
     let { userName, password } = this.state;
-    debugger;
+
     login(userName, password)
       .then(response => {
         this.setState({ msgError: "" });
@@ -29,10 +29,10 @@ export default class Login extends Component {
 
   handleChange = evt => {
     this.setState({ [evt.target.name]: evt.target.value });
-  
   };
 
   render() {
+    
     return (
       <div>
         <form onSubmit={this.validateLogin}>
@@ -41,7 +41,8 @@ export default class Login extends Component {
           <div className="form-group">
             <label htmlFor="userName">Nombre de usuario</label>
             <input
-            name="userName"
+              //value="smanzoni@gmail.com"
+              name="userName"
               placeholder="Username"
               className="form-control mx-auto"
               type="text"
@@ -52,7 +53,8 @@ export default class Login extends Component {
           <div className="form-group">
             <label htmlFor="password">Contraseña</label>
             <input
-            name="password"
+              //value="12345678"
+              name="password"
               placeholder="Password"
               className="form-control mx-auto"
               type="password"

@@ -26,12 +26,8 @@ export default class Login extends Component {
       });
   };
 
-  handleUsr = evt => {
-    this.setState({ userName: evt.value });
-  };
-
-  handlePw = evt => {
-    this.setState({ password: evt.value });
+  handleChange = evt => {
+    this.setState({ [evt.target.name]: evt.target.value });
   };
 
   render() {
@@ -44,22 +40,24 @@ export default class Login extends Component {
         <div className="form-group">
           <label htmlFor="userName">Nombre de usuario</label>
           <input
+            name="userName"
             placeholder="Username"
             className="form-control mx-auto"
             type="text"
             value={userName}
-            onChange={evt => this.handleUsr(evt)}
+            onChange={evt => this.handleChange(evt)}
           />
         </div>
 
         <div className="form-group">
           <label htmlFor="password">Contraseña</label>
           <input
+            name="password"
             placeholder="Password"
             className="form-control mx-auto"
             type="password"
             value={password}
-            onChange={evt => this.handlePw(evt)}
+            onChange={evt => this.handleChange(evt)}
           />
         </div>
 
