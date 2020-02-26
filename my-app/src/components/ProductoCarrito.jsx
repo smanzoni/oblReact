@@ -7,13 +7,15 @@ export default class ProductoCarrito extends Component {
 
   render() {
     const { name, quantity, price } = this.props;
+    const style = {"color":"white"}
+    
     return (
       <div>
         <div>
-          <h4>{name}:</h4> {quantity} unidades = ${quantity * price}
+          <label><b>{name}:</b></label><br/> {quantity} unidad/es = ${quantity * price}
         </div>
         <div>
-          <hr />
+          <hr style={style}/>
         </div>
       </div>
     );

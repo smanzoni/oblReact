@@ -48,7 +48,7 @@ export default class Home extends Component {
 
         <div className="row">
           
-          <div className="col-3">
+          <div className="col-3 float-right">
             <CarritoList productosCarrito={productosCarrito} />
           </div>
 
