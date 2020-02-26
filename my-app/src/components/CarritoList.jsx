@@ -38,7 +38,7 @@ export default class CarritoList extends Component {
           />
         ))}
 
-        <div>Total: ${precioFinal}</div>
+        <div>Total: ${precioFinal.toFixed(2)}</div>
       </div>
     );
   }
