@@ -7,12 +7,13 @@ export default class ProductoCarrito extends Component {
 
   render() {
     const { name, quantity, price } = this.props;
+    const itemPrice = (quantity * price).toFixed(2);
     const style = {"color":"white"}
     
     return (
       <div>
         <div>
-          <label><b>{name}:</b></label><br/> {quantity} unidad/es = ${quantity * price}
+          <label><b>{name}:</b></label><br/> {quantity} unidad/es = ${itemPrice}
         </div>
         <div>
           <hr style={style}/>

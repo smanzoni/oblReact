@@ -1,44 +1,43 @@
 import React, { Component } from "react";
 import ProductoCarrito from "./ProductoCarrito";
+import {countCartTotalAmount} from './../librerias-utils/utils'
 
 export default class CarritoList extends Component {
   constructor(props) {
     super(props);
   }
 
-  finalPrice = () => {
-    let { productosCarrito } = this.props;
-    let finalP = 0;
-    productosCarrito.forEach(p => {
-      finalP += p.price * p.quantity;
-    });
-
-    return finalP;
-  };
-
   render() {
-    const { productosCarrito } = this.props;
-    const precioFinal = this.finalPrice();
     const style = {
       "color": "white",
-      "background-color": "black",
+      "backgroundColor": "black",
       "height":"100%"
     };
 
+    const { productosCarrito } = this.props;
+    const subTotal = countCartTotalAmount(productosCarrito);
+    const iva = (18*subTotal)/100;
+    const finalPrice = Number(subTotal) + Number(iva);
+    
+
     return (
       <div className="pl-2" style={style}>
-        <div><h5>Items seleccionados</h5><hr/></div>
+        <div><h5><u>Items seleccionados</u></h5><hr/></div>
 
         {productosCarrito.map((p, index) => (
           <ProductoCarrito
             key={index}
             name={p.name}
             quantity={p.quantity}
-            price={p.price}
+            price={p.price.toFixed(2)}
           />
         ))}
 
-        <div>Total: ${precioFinal.toFixed(2)}</div>
+        <div>
+          SubTotal: ${subTotal.toFixed(2)}<br/>
+          IVA: ${iva.toFixed(2)}<br/>
+          <u><b>Precio final: ${finalPrice.toFixed(2)}</b></u>
+        </div>
       </div>
     );
   }

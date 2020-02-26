@@ -7,8 +7,8 @@ export default class Layout extends Component {
 
   render() {
     const styleIn = {
-      "background-color": "black",
-      padding: "10px"
+      "backgroundColor": "black",
+      "padding": "10px"
     };
     const { handleShow } = this.props;
 

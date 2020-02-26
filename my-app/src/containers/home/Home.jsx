@@ -24,7 +24,6 @@ export default class Home extends Component {
   }
 
   addToCarrito = idProducto => {
-    debugger;
 
     let { productosCarrito, products } = this.state;
     let item = products.find(p => p._id === idProducto);

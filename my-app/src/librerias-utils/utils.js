@@ -14,7 +14,7 @@ const filterProductsByName = (products, name) => {
 const addToCart = (cart, item) => {
 
     if(cart.find(p => p._id === item._id )){
-        cart = cart.map(p => { if(p._id === item._id) p.quantity++ });
+        cart.forEach(p => { if(p._id === item._id) p.quantity++ });
     }else{
         let newItem = new CartItem( item._id, item.name, item.description, item.price, item.photo );
         cart.push(newItem);

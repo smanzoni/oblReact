@@ -7,8 +7,8 @@ export default class Producto extends Component {
 
   render() {
     const style = {
-      "border-style": "groove",
-      "border-radious": "14px",
+      "borderStyle": "groove",
+      "borderRadious": "14px",
     };
     const {name,photo,price,description,idProd,addToCarrito} = this.props;
 
