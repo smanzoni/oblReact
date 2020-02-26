@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Producto from "./../../components/Producto";
+import CarritoList from "./../../components/CarritoList";
 import Layout from "./../../components/Layout";
 import { getProducts } from "../../librerias-utils/services";
-//import { addToCart } from "../../librerias-utils/utils";
+import { addToCart } from "../../librerias-utils/utils";
 
 export default class Home extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class Home extends Component {
   componentDidMount() {
     getProducts()
       .then(response => {
-        console.log(response);
+        console.log(this.state.productosCarrito);
         this.setState({ products: response.data });
       })
       .catch(error => {
@@ -23,13 +24,18 @@ export default class Home extends Component {
   }
 
   addToCarrito = idProducto => {
-    // let { productosCarrito } = this.state;
-    // let cart = addToCart(productosCarrito, idProducto);
-    // this.setState({ productosCarrito: cart });
+    debugger;
+
+    let { productosCarrito, products } = this.state;
+    let item = products.find(p => p._id === idProducto);
+
+    let cart = Array.from(addToCart(productosCarrito, item));
+    this.setState({ productosCarrito: [...cart] });
+    console.log(this.state.productosCarrito);
   };
 
   render() {
-    const { products } = this.state;
+    const { products, productosCarrito } = this.state;
     const { handleShow } = this.props;
 
     return (
@@ -37,19 +43,29 @@ export default class Home extends Component {
         <div className="row d-block">
           <Layout handleShow={handleShow} />
         </div>
+
+        <div className="d-block"></div>
+
         <div className="row">
-          <div className="d-block"></div>
-          {products.map((p, index) => (
-            <Producto
-              key={index}
-              idProd={p._id}
-              name={p.name}
-              description={p.description}
-              price={p.price}
-              photo={p.photo}
-              addToCarrito={this.addToCarrito}
-            />
-          ))}
+          
+          <div className="col-3">
+            <CarritoList productosCarrito={productosCarrito} />
+          </div>
+
+          <div className="row col-9">
+            {products.map((p, index) => (
+              <Producto
+                className="col-4"
+                key={index}
+                idProd={p._id}
+                name={p.name}
+                description={p.description}
+                price={p.price}
+                photo={p.photo}
+                addToCarrito={this.addToCarrito}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );

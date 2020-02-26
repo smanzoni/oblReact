@@ -8,7 +8,7 @@ export default class Login extends Component {
     super(props);
     this.state = {
       userName: "",
-      password: "",
+      password: ""
     };
   }
 
@@ -18,26 +18,24 @@ export default class Login extends Component {
 
     login(userName, password)
       .then(response => {
-        this.setState({ msgError: "" });
         this.props.handleShow("home");
       })
       .catch(error => {
-          alert("Las credenciales especificadas no son válidas.");
+        alert("Las credenciales especificadas no son válidas.");
       });
   };
-
 
   handleChange = evt => {
     this.setState({ [evt.target.name]: evt.target.value });
   };
 
   render() {
-    
     return (
       <div>
         <form onSubmit={this.validateLogin}>
           <h2 className="mx-auto">Login</h2>
           <br />
+
           <div className="form-group">
             <label htmlFor="userName">Nombre de usuario</label>
             <input
@@ -50,6 +48,7 @@ export default class Login extends Component {
               onChange={evt => this.handleChange(evt)}
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="password">Contraseña</label>
             <input

@@ -14,7 +14,7 @@ export default class Producto extends Component {
     const { idProd, name, description, price, photo, addToCarrito } = this.props;
 
     return (
-      <figure className="col-lg-3 h-30" style={style}>
+      <figure className="h-30" style={style}>
         <img className="img-fluid rounded h-40 w-100" alt={name} src={photo} />
         <figcaption>
           <h4>{name}</h4>
