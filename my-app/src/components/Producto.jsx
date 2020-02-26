@@ -10,10 +10,11 @@ export default class Producto extends Component {
       "border-style": "groove",
       "border-radious": "14px",
     };
-
-    const { idProd, name, description, price, photo, addToCarrito } = this.props;
+    const {name,photo,price,description,idProd,addToCarrito} = this.props;
 
     return (
+      
+
       <figure className="h-30 col-4" style={style}>
         <img className="img-fluid rounded h-40 w-100" alt={name} src={photo} />
         <figcaption>

@@ -30,7 +30,7 @@ export default class Home extends Component {
     let item = products.find(p => p._id === idProducto);
 
     let cart = Array.from(addToCart(productosCarrito, item));
-    this.setState({ productosCarrito: [...cart] });
+    this.setState({ productosCarrito: cart });
     console.log(this.state.productosCarrito);
   };
 
