@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Producto from "./../../components/Producto";
 import CarritoList from "./../../components/CarritoList";
 import Layout from "./../../components/Layout";
-import { getProducts } from "../../librerias-utils/services";
-import { addToCart } from "../../librerias-utils/utils";
+import { getProducts  } from "../../librerias-utils/services";
+import { addToCart, removeOneUnit, deleteFromCarrito } from "../../librerias-utils/utils";
 
 export default class Home extends Component {
   constructor(props) {
@@ -19,18 +19,29 @@ export default class Home extends Component {
         this.setState({ products: response.data });
       })
       .catch(error => {
+        console.log(error);
         alert("Error al cargar los productos.");
       });
   }
 
   addToCarrito = idProducto => {
-
     let { productosCarrito, products } = this.state;
     let item = products.find(p => p._id === idProducto);
 
-    let cart = Array.from(addToCart(productosCarrito, item));
+    let cart = addToCart(productosCarrito, item);
     this.setState({ productosCarrito: cart });
-    console.log(this.state.productosCarrito);
+  };
+
+  handleDeleteFromCarrito = idProducto => {
+    let { productosCarrito } = this.state; 
+    let cart =deleteFromCarrito( productosCarrito, idProducto);
+    this.setState({productosCarrito: cart});
+  };
+
+  handleRemoveOneUnit = idProducto => {
+    let { productosCarrito } = this.state; 
+    let cart = removeOneUnit( productosCarrito, idProducto);
+    this.setState({productosCarrito: cart});
   };
 
   render() {
@@ -43,12 +54,15 @@ export default class Home extends Component {
           <Layout handleShow={handleShow} />
         </div>
 
-        <div className="d-block"></div>
+        <div className="d-block" />
 
         <div className="row">
-          
           <div className="col-3 float-right">
-            <CarritoList productosCarrito={productosCarrito} />
+            <CarritoList
+              productosCarrito={productosCarrito}
+              removeOneUnit={this.handleRemoveOneUnit}
+              deleteFromCarrito={this.handleDeleteFromCarrito}
+            />
           </div>
 
           <div className="row col-9">

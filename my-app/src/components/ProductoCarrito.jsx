@@ -6,17 +6,29 @@ export default class ProductoCarrito extends Component {
   }
 
   render() {
-    const { name, quantity, price } = this.props;
+    const {
+      name,
+      quantity,
+      price,
+      id,
+      removeOneUnit,
+      deleteFromCarrito
+    } = this.props;
     const itemPrice = (quantity * price).toFixed(2);
-    const style = {"color":"white"}
-    
+    const style = { color: "white" };
+
     return (
       <div>
         <div>
-          <label><b>{name}:</b></label><br/> {quantity} unidad/es = ${itemPrice}
+          <label>
+            <b>{name}:</b>
+          </label>
+          <br /> {quantity} unidad/es = ${itemPrice}
+          <button className="btn btn-danger" onClick={() => removeOneUnit(id)}>Quitar 1</button>
+          <button className="btn btn-danger" onClick={() => deleteFromCarrito(id)}>Eliminar</button>
         </div>
         <div>
-          <hr style={style}/>
+          <hr style={style} />
         </div>
       </div>
     );

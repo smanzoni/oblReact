@@ -1,7 +1,5 @@
 import CartItem from "./CartItem";
 
-//***************************************************************************//
-//***************************************************************************//
 
 const filterProductsByName = (products, name) => {
   return products.filter(product => {
@@ -9,21 +7,27 @@ const filterProductsByName = (products, name) => {
   });
 };
 
-//***************************************************************************//
 
 const addToCart = (cart, item) => {
+  let newCart = [...cart];
+  let i = newCart.findIndex(p=> p._id === item._id);
 
-    if(cart.find(p => p._id === item._id )){
-        cart.forEach(p => { if(p._id === item._id) p.quantity++ });
-    }else{
-        let newItem = new CartItem( item._id, item.name, item.description, item.price, item.photo );
-        cart.push(newItem);
-    }
+  if( i !== -1 ){
+    newCart[i].quantity++;
+  }else{
+    let newItem = new CartItem(
+      item._id,
+      item.name,
+      item.description,
+      item.price,
+      item.photo
+    );
+    newCart.push(newItem);
+  }
 
-  return cart;
+  return newCart;
 };
 
-//***************************************************************************//
 
 const countCartItems = cart => {
   let count = 0;
@@ -34,7 +38,6 @@ const countCartItems = cart => {
   return count;
 };
 
-//***************************************************************************//
 
 const countCartTotalAmount = cart => {
   let totalAmount = 0;
@@ -45,9 +48,31 @@ const countCartTotalAmount = cart => {
   return totalAmount;
 };
 
+
+const removeOneUnit = (carritoCart, id) => {
+  let newCarrito = [...carritoCart];
+  const i = newCarrito.findIndex(p => p._id === id);
+  if (i !== -1) {
+    newCarrito[i].quantity--;
+    if(newCarrito[i].quantity == 0){
+      newCarrito = deleteFromCarrito(carritoCart, id);
+    }
+  }
+
+  return newCarrito;
+};
+
+
+const deleteFromCarrito = (carritoCart, id) => {
+  return carritoCart.filter(p => p._id !== id);
+};
+
+
 export {
   filterProductsByName,
   addToCart,
   countCartItems,
-  countCartTotalAmount
+  countCartTotalAmount,
+  deleteFromCarrito,
+  removeOneUnit
 };
