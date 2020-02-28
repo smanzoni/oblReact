@@ -8,7 +8,7 @@ export default class Login extends Component {
     super(props);
     this.state = {
       userName: "",
-      password: ""
+      password: "",
     };
   }
 
@@ -18,9 +18,11 @@ export default class Login extends Component {
 
     login(userName, password)
       .then(response => {
-        this.props.handleShow("home");
+        console.log(response);
+        this.props.handleShow("home",userName);
       })
       .catch(error => {
+        console.log(error);
         alert("Las credenciales especificadas no son válidas.");
       });
   };
@@ -30,6 +32,7 @@ export default class Login extends Component {
   };
 
   render() {
+
     return (
       <div>
         <form onSubmit={this.validateLogin}>
@@ -39,7 +42,6 @@ export default class Login extends Component {
           <div className="form-group">
             <label htmlFor="userName">Nombre de usuario</label>
             <input
-              //value="smanzoni@gmail.com"
               name="userName"
               placeholder="Username"
               className="form-control mx-auto"
@@ -52,7 +54,6 @@ export default class Login extends Component {
           <div className="form-group">
             <label htmlFor="password">Contraseña</label>
             <input
-              //value="12345678"
               name="password"
               placeholder="Password"
               className="form-control mx-auto"

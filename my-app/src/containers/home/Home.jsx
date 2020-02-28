@@ -2,8 +2,12 @@ import React, { Component } from "react";
 import Producto from "./../../components/Producto";
 import CarritoList from "./../../components/CarritoList";
 import Layout from "./../../components/Layout";
-import { getProducts  } from "../../librerias-utils/services";
-import { addToCart, removeOneUnit, deleteFromCarrito } from "../../librerias-utils/utils";
+import { getProducts } from "../../librerias-utils/services";
+import {
+  addToCart,
+  removeOneUnit,
+  deleteFromCarrito
+} from "../../librerias-utils/utils";
 
 export default class Home extends Component {
   constructor(props) {
@@ -33,52 +37,50 @@ export default class Home extends Component {
   };
 
   handleDeleteFromCarrito = idProducto => {
-    let { productosCarrito } = this.state; 
-    let cart =deleteFromCarrito( productosCarrito, idProducto);
-    this.setState({productosCarrito: cart});
+    let { productosCarrito } = this.state;
+    let cart = deleteFromCarrito(productosCarrito, idProducto);
+    this.setState({ productosCarrito: cart });
   };
 
   handleRemoveOneUnit = idProducto => {
-    let { productosCarrito } = this.state; 
-    let cart = removeOneUnit( productosCarrito, idProducto);
-    this.setState({productosCarrito: cart});
+    let { productosCarrito } = this.state;
+    let cart = removeOneUnit(productosCarrito, idProducto);
+    this.setState({ productosCarrito: cart });
   };
 
   render() {
     const { products, productosCarrito } = this.state;
-    const { handleShow } = this.props;
+    const { handleShow, userLogged } = this.props;
 
     return (
-      <div>
-        <div className="row d-block">
-          <Layout handleShow={handleShow} />
+      <div className="row">
+        <div className="col-12 d-block">
+          <Layout handleShow={handleShow} userLogged={userLogged} />
         </div>
 
         <div className="d-block" />
 
-        <div className="row">
-          <div className="col-3 float-right">
-            <CarritoList
-              productosCarrito={productosCarrito}
-              removeOneUnit={this.handleRemoveOneUnit}
-              deleteFromCarrito={this.handleDeleteFromCarrito}
-            />
-          </div>
+        <div className="col-3">
+          <CarritoList
+            productosCarrito={productosCarrito}
+            removeOneUnit={this.handleRemoveOneUnit}
+            deleteFromCarrito={this.handleDeleteFromCarrito}
+          />
+        </div>
 
-          <div className="row col-9">
-            {products.map((p, index) => (
-              <Producto
-                className="col-4"
-                key={index}
-                idProd={p._id}
-                name={p.name}
-                description={p.description}
-                price={p.price}
-                photo={p.photo}
-                addToCarrito={this.addToCarrito}
-              />
-            ))}
-          </div>
+        <div className="col-9 row">
+          {products.map((p, index) => (
+            <Producto
+              className="col-4"
+              key={index}
+              idProd={p._id}
+              name={p.name}
+              description={p.description}
+              price={p.price}
+              photo={p.photo}
+              addToCarrito={this.addToCarrito}
+            />
+          ))}
         </div>
       </div>
     );

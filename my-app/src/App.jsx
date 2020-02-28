@@ -11,14 +11,15 @@ export default class App extends Component {
     this.state = {
       showLogin: true,
       showSignUp: false,
-      showHome: false
+      showHome: false,
+      userName: "",
     };
   }
 
-  handleShow = comp => {
+  handleShow = (comp, user="" ) => {
     switch (comp) {
       case "login": {
-        this.setState({ showLogin: true, showSignUp: false, showHome: false });
+        this.setState({ showLogin: true, showSignUp: false, showHome: false});
         break;
       }
       case "signUp": {
@@ -26,18 +27,19 @@ export default class App extends Component {
         break;
       }
       case "home": {
-        this.setState({ showLogin: false, showSignUp: false, showHome: true });
+        this.setState({ showLogin: false, showSignUp: false, showHome: true, userName: user });
         break;
       }
     }
   };
 
   render() {
+    let { userName } = this.state;
     return (
       <div className="container">
         {this.state.showLogin && <Login handleShow={this.handleShow} />}
         {this.state.showSignUp && <SignUp handleShow={this.handleShow} />}
-        {this.state.showHome && <Home handleShow={this.handleShow} />}
+        {this.state.showHome && <Home handleShow={this.handleShow} userLogged={userName}/>}
       </div>
     );
   }

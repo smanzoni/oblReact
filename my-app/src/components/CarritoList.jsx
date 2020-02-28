@@ -25,7 +25,7 @@ export default class CarritoList extends Component {
           <h5>
             <u>Items seleccionados</u>
           </h5>
-          <hr />
+          <b>____________________________________</b>
         </div>
 
         {productosCarrito.map((p, index) => (
@@ -40,13 +40,13 @@ export default class CarritoList extends Component {
           />
         ))}
 
-        <div>
+        <div className="mt-3">
           SubTotal: ${subTotal.toFixed(2)}
           <br />
           IVA: ${iva.toFixed(2)}
           <br />
           <u>
-            <b>Precio final: ${finalPrice.toFixed(2)}</b>
+            <b>Precio final:</b> ${finalPrice.toFixed(2)}
           </u>
         </div>
       </div>

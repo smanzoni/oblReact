@@ -23,12 +23,12 @@ export default class ProductoCarrito extends Component {
           <label>
             <b>{name}:</b>
           </label>
-          <br /> {quantity} unidad/es = ${itemPrice}
+          <br /> {quantity} unidad/es = ${itemPrice}<br/>
           <button className="btn btn-danger" onClick={() => removeOneUnit(id)}>Quitar 1</button>
           <button className="btn btn-danger" onClick={() => deleteFromCarrito(id)}>Eliminar</button>
         </div>
         <div>
-          <hr style={style} />
+          <b>____________________________________</b>
         </div>
       </div>
     );
