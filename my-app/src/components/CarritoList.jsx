@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ProductoCarrito from "./ProductoCarrito";
-import { countCartTotalAmount } from "./../librerias-utils/utils";
+import { countCartTotalAmount, countCartItems } from "./../librerias-utils/utils";
 
 export default class CarritoList extends Component {
   constructor(props) {
@@ -16,6 +16,7 @@ export default class CarritoList extends Component {
 
     const { productosCarrito, removeOneUnit, deleteFromCarrito } = this.props;
     const subTotal = countCartTotalAmount(productosCarrito);
+    const countItems = countCartItems(productosCarrito);
     const iva = (18 * subTotal) / 100;
     const finalPrice = Number(subTotal) + Number(iva);
 
@@ -41,6 +42,8 @@ export default class CarritoList extends Component {
         ))}
 
         <div className="mt-3">
+          Cant. items seleccionados: {countItems} 
+          <br />
           SubTotal: ${subTotal.toFixed(2)}
           <br />
           IVA: ${iva.toFixed(2)}

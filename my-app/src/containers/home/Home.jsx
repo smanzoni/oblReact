@@ -6,14 +6,15 @@ import { getProducts } from "../../librerias-utils/services";
 import {
   addToCart,
   removeOneUnit,
-  deleteFromCarrito
+  deleteFromCarrito,
+  filterProductsByName
 } from "../../librerias-utils/utils";
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { products: [], productosCarrito: [] };
+    this.state = { products: [], productosCarrito: [], filtroCarrito: "", };
   }
 
   componentDidMount() {
@@ -26,6 +27,12 @@ export default class Home extends Component {
         console.log(error);
         alert("Error al cargar los productos.");
       });
+  }
+
+  busqueda = product =>{
+      debugger;
+      let {products} = this.state;
+      product !== "" ? this.setState( {products: filterProductsByName(products, product)} ) : getProducts();
   }
 
   addToCarrito = idProducto => {
@@ -55,7 +62,7 @@ export default class Home extends Component {
     return (
       <div className="row">
         <div className="col-12 d-block">
-          <Layout handleShow={handleShow} userLogged={userLogged} />
+          <Layout handleShow={handleShow} userLogged={userLogged} busqueda={this.busqueda} />
         </div>
 
         <div className="d-block" />
